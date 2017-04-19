@@ -16,7 +16,7 @@ openssl aes-256-cbc -K $encrypted_e35043491734_key -iv $encrypted_e35043491734_i
 set -x
 
 chmod 400 homebrew-ocrmypdf_key
-ssh-add homebrew-ocrmypdf_key
+ssh-add -K homebrew-ocrmypdf_key
 export GIT_SSH_COMMAND="ssh -i homebrew-ocrmypdf_key -F /dev/null"
 
 git clone git@github.com:jbarlow83/homebrew-ocrmypdf.git homebrew
