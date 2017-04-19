@@ -9,18 +9,6 @@ cache:
 
 matrix:
   include:
-    - os: linux
-      sudo: required
-      language: python
-      python: 3.4
-    - os: linux
-      sudo: required
-      language: python
-      python: 3.5
-    - os: linux
-      sudo: required
-      language: python
-      python: 3.6
     - os: osx
       osx_image: xcode8
       language: generic
@@ -28,9 +16,12 @@ matrix:
 before_cache:
 - rm -f $HOME/.cache/pip/log/debug.log
 
-before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then bash .travis/linux_before_install.sh ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash .travis/osx_before_install.sh ; fi
+before_install: |
+  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    bash .travis/linux_before_install.sh
+  elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    bash .travis/osx_before_install.sh
+  fi
 
 install:
 - pip3 install .
@@ -38,7 +29,7 @@ install:
 
 script:
 - mv ocrmypdf dont_import_this_ocrmypdf
-- pytest
+#- pytest
 - mv dont_import_this_ocrmypdf ocrmypdf
 
 after_success:
