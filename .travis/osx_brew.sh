@@ -19,7 +19,6 @@ chmod 400 homebrew-ocrmypdf_key
 ssh-add -K homebrew-ocrmypdf_key
 export GIT_SSH_COMMAND="ssh -i homebrew-ocrmypdf_key -F /dev/null"
 
-echo "#!/bin/sh\nexit 0"
 chmod a+rx .travis/ssh-askpass
 export SSH_ASKPASS="$(pwd)/.travis/ssh-askpass"
 
