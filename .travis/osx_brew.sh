@@ -8,10 +8,16 @@ cat ocrmypdf.rb
 brew audit ocrmypdf.rb
 
 # Extract deploy key for jbarlow83/homebrew-ocrmypdf
+# Disable debug to avoid outputting key
+echo "Decrypting .travis/homebrew-ocrmypdf.enc"
+set +x
 openssl aes-256-cbc -K $encrypted_e35043491734_key -iv $encrypted_e35043491734_iv \
     -in .travis/homebrew-ocrmypdf.enc -out homebrew-ocrmypdf_key -d
+set -x
 
-export GIT_SSH_COMMAND="ssh -i homebrew-ocrmypdf_key"
+chmod 400 homebrew-ocrmypdf_key
+ssh-add homebrew-ocrmypdf_key
+export GIT_SSH_COMMAND="ssh -i homebrew-ocrmypdf_key -F /dev/null"
 
 git clone git@github.com:jbarlow83/homebrew-ocrmypdf.git homebrew
 
