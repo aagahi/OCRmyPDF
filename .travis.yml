@@ -58,7 +58,7 @@ deploy:
   on:
     branch: better-homebrewing
     tags: false
-    condition: $TRAVIS_PYTHON_VERSION == "3.6" && $TRAVIS_OS_NAME == "osx"
+    condition: $TRAVIS_OS_NAME == "osx"
 
 after_deploy:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then bash .travis/osx_brew.sh ; fi
