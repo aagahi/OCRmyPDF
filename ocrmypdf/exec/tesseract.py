@@ -315,6 +315,12 @@ def generate_pdf(input_image, skip_pdf, output_pdf, language: list,
     if text_only:
         args_tesseract.extend(['-c', 'textonly_pdf=1'])
 
+    input_image_clean = input_image + '-clean.png'
+    log.info('Textcleaning ' + input_image)
+    os.system('textcleaner -g -e stretch -f 25 -o 10 -u ' + input_image + ' ' + input_image_clean)
+    os.rename(input_image_clean, input_image)
+
+
     args_tesseract.extend([
         input_image,
         os.path.splitext(output_pdf)[0],  # Tesseract appends suffix
