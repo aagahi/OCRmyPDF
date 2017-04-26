@@ -161,8 +161,8 @@ def triage(
 
     try:
         with open(input_file, 'rb') as f:
-            signature = f.read(4)
-            if signature == b'%PDF':
+            signature = f.read(1024)
+            if signature.find(b'%PDF'):
                 re_symlink(input_file, output_file, log)
                 return
     except EnvironmentError as e:
