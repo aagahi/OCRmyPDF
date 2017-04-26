@@ -93,7 +93,7 @@ def cleanup_working_files(work_folder, options):
 
 def triage_image_file(input_file, output_file, log, options):
     try:
-        log.info("Input file is not a PDF, checking if it is an image...")
+        log.info("Input file has no PDF signature, checking if it is an image...")
         im = Image.open(input_file)
     except EnvironmentError as e:
         msg = str(e)
