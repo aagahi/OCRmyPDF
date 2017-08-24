@@ -46,21 +46,22 @@ HOCR_TEMPLATE = '''<?xml version="1.0" encoding="UTF-8"?>
 
 @lru_cache(maxsize=1)
 def version():
-    args_tess = [
-        get_program('tesseract'),
-        '--version'
-    ]
-    try:
-        versions = check_output(
-                args_tess, close_fds=True, universal_newlines=True,
-                stderr=STDOUT)
-    except CalledProcessError as e:
-        print("Could not find Tesseract executable on system PATH.",
-              file=sys.stderr)
-        raise MissingDependencyError from e
+    return '4.0'
+    # args_tess = [
+    #     get_program('tesseract'),
+    #     '--version'
+    # ]
+    # try:
+    #     versions = check_output(
+    #             args_tess, close_fds=True, universal_newlines=True,
+    #             stderr=STDOUT)
+    # except CalledProcessError as e:
+    #     print("Could not find Tesseract executable on system PATH.",
+    #           file=sys.stderr)
+    #     raise MissingDependencyError from e
 
-    tesseract_version = re.match(r'tesseract\s(.+)', versions).group(1)
-    return tesseract_version
+    # tesseract_version = re.match(r'tesseract\s(.+)', versions).group(1)
+    # return tesseract_version
 
 
 def v4():
